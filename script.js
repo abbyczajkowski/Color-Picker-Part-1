@@ -1,0 +1,44 @@
+window.onload = function () {
+    initColorPicker();
+};
+
+function initColorPicker() {
+    let colorbox = document.getElementById("color-box");
+    let rgb = {
+        red: document.getElementById("red"),
+        green: document.getElementById("green"),
+        blue: {
+            value: 255
+        }
+    };
+    let colorPickers = document.getElementsByClassName("picker");
+    setColorPickerEventListeners(colorbox, rgb, colorPickers);
+}
+
+function setColorPickerEventListeners(element, colors, pickerElements) {
+    let pickerLen = pickerElements.length;
+    for (let i = 0; i < pickerLen; i++) {
+        pickerElements[i].addEventListener('change', () => {
+            let red = colors.red.value;
+            let green = colors.green.value;
+            let blue = colors.blue.value;
+            setElementBoxBGColor(element, red, green, blue);
+            setDisplayValues(red, green, blue)
+        });
+    }
+}
+
+function setElementBoxBGColor(bgElement, red, green, blue) {
+    let rgbVal = [red, green, blue].join(',');
+    bgElement.style.backgroundColor = "rgb(" + rgbVal + ")";
+}
+
+function setDisplayValues(red, green, blue) {
+    let redVal = document.getElementById("redVal");
+    let greenVal = document.getElementById("greenVal");
+    let blueVal = document.getElementById("blueVal");
+
+    redVal.innerText = red;
+    greenVal.innerText = green;
+    blueVal.innerText = blue;
+}
